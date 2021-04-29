@@ -21,7 +21,7 @@ var userController = /** @class */ (function () {
                     var token = jsonwebtoken_1.sign({ id: result._id }, private_key, { expiresIn: '1h' });
                     // compare password with the function provided by bcrypt
                     if (bcryptjs_1.compareSync(req.body.password, result.password)) {
-                        res.json({ status: 'Success', message: 'Login is successful', data: token });
+                        res.json({ status: 'Success', message: 'Login is successful', data: token, role: result.role });
                     }
                     else {
                         res.status(500).json({ status: 'failed', message: 'UserName or Password is incorrect!' });

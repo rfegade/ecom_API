@@ -19,7 +19,7 @@ export class userController {
 
                     // compare password with the function provided by bcrypt
                     if(compareSync(req.body.password, result.password)) {
-                        res.json({status : 'Success', message: 'Login is successful', data: token })
+                        res.json({status : 'Success', message: 'Login is successful', data: token, role: result.role })
                     } else {
                         res.status(500).json({status : 'failed', message: 'UserName or Password is incorrect!' })
                     }

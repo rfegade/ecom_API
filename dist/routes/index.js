@@ -13,3 +13,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./categoryRoutes"), exports);
 __exportStar(require("./productRoutes"), exports);
 __exportStar(require("./userRoutes"), exports);
+__exportStar(require("./errorLogRoute"), exports);
+__exportStar(require("./wishlistRoutes"), exports);

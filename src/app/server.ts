@@ -1,14 +1,23 @@
 import * as express from 'express';
-import {userRoute, categoryRoute, productRoute} from './routes/index';
+import {userRoute, categoryRoute, productRoute, errorLogRoute, wishlistRoute} from './routes/index';
 import * as bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
 import { mongoConnect } from './db/db';
+import { validateUser } from './middleware/auth';
 
 // load environment file
 dotenv.config();
 
 // load express App
 var app = express();
+
+// Allow CORS 
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+    next();
+});
 
 // load bodyparsor to parse json data
 app.use(bodyParser.urlencoded({extended:false}));
@@ -18,6 +27,9 @@ app.use(bodyParser.json())
 app.use('/user', userRoute);
 app.use('/category',categoryRoute);
 app.use('/product', productRoute);
+app.use('/errorLog', errorLogRoute);
+app.use('/wishlist', validateUser, wishlistRoute);
+
 // Port
 app.listen(3000, () => {
     mongoConnect.connect().then(res => console.log('Database is connected'));
