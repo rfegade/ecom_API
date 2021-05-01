@@ -1,9 +1,13 @@
 import {Request, Response, NextFunction, Errback} from 'express';
+import { Types } from 'mongoose';
 import { WishList } from '../models/WishList';
 
 export class WishListController {
     static getWishList(req:Request, res:Response, next:NextFunction){
         WishList.aggregate([
+            {
+                $match : { userId: new Types.ObjectId(req.body.userId), status: 'A'}
+            },
             {
                 $lookup: {
                     from: 'products',
@@ -15,9 +19,7 @@ export class WishListController {
 
         ],(err: Errback, result: any) => {
             if(err) {
-                res.status(500).json(
-                    {status: 'failed', message: err }
-                )
+                res.status(500).json({status: 'failed', message: err })
             } else {
                 res.json({status: 'success', message: 'User WishList!', data : result})
             }

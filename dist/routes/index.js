@@ -15,3 +15,4 @@ __exportStar(require("./productRoutes"), exports);
 __exportStar(require("./userRoutes"), exports);
 __exportStar(require("./errorLogRoute"), exports);
 __exportStar(require("./wishlistRoutes"), exports);
+__exportStar(require("./cartRoutes"), exports);

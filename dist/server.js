@@ -5,7 +5,6 @@ var index_1 = require("./routes/index");
 var bodyParser = require("body-parser");
 var dotenv = require("dotenv");
 var db_1 = require("./db/db");
-var auth_1 = require("./middleware/auth");
 // load environment file
 dotenv.config();
 // load express App
@@ -24,7 +23,8 @@ app.use('/user', index_1.userRoute);
 app.use('/category', index_1.categoryRoute);
 app.use('/product', index_1.productRoute);
 app.use('/errorLog', index_1.errorLogRoute);
-app.use('/wishlist', auth_1.validateUser, index_1.wishlistRoute);
+app.use('/wishlist', index_1.wishlistRoute);
+app.use('/cart', index_1.cartRoute);
 // Port
 app.listen(3000, function () {
     db_1.mongoConnect.connect().then(function (res) { return console.log('Database is connected'); });

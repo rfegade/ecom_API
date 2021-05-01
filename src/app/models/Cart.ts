@@ -20,7 +20,7 @@ const CartSchema  = new Schema({
         type: String,
         default: 'A'
     },
-    createdOn: {
+    createOn: {
         type: Date,
         default: new Date()
     },

@@ -1,8 +1,9 @@
 import { CartController } from '../controllers/cartController';
 import * as express from 'express';
+import { validateUser } from '../middleware/auth';
 
 export const cartRoute = express.Router();
 
-cartRoute.get('/', CartController.getCart);
-cartRoute.post('/', CartController.saveCart);
+cartRoute.get('/', validateUser, CartController.getUserCart);
+cartRoute.post('/', validateUser, CartController.saveToCart);
 

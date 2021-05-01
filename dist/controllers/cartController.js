@@ -1,12 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CartController = void 0;
+var mongoose_1 = require("mongoose");
 var Cart_1 = require("../models/Cart");
 var CartController = /** @class */ (function () {
     function CartController() {
     }
-    CartController.getCart = function (req, res, next) {
+    CartController.getUserCart = function (req, res, next) {
         Cart_1.Cart.aggregate([
+            {
+                $match: { userId: new mongoose_1.Types.ObjectId(req.body.userId), status: 'A' }
+            },
             {
                 $lookup: {
                     from: 'products',
@@ -24,7 +28,7 @@ var CartController = /** @class */ (function () {
             }
         });
     };
-    CartController.saveCart = function (req, res, next) {
+    CartController.saveToCart = function (req, res, next) {
         var cart = new Cart_1.Cart(req.body);
         Cart_1.Cart.insertMany(cart).then(function (result) {
             res.json({ status: 'success', message: 'Product is added to cart!', data: {} });

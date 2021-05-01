@@ -1,9 +1,13 @@
 import {Request, Response, NextFunction, Errback} from 'express';
+import { Types } from 'mongoose';
 import { Cart } from '../models/Cart';
 
 export class CartController {
-    static getCart(req:Request, res:Response, next:NextFunction){
+    static getUserCart(req:Request, res:Response, next:NextFunction){
         Cart.aggregate([
+            {
+                $match : { userId: new Types.ObjectId(req.body.userId) , status: 'A'}
+            },
             {
                 $lookup: {
                     from: 'products',
@@ -24,7 +28,7 @@ export class CartController {
         })
     }
 
-    static saveCart(req:Request, res:Response, next:NextFunction){
+    static saveToCart(req:Request, res:Response, next:NextFunction){
         const cart = new Cart(req.body);
         Cart.insertMany(cart).then(function(result){
             res.json({status: 'success', message: 'Product is added to cart!', data : {}})

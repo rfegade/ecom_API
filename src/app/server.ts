@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {userRoute, categoryRoute, productRoute, errorLogRoute, wishlistRoute} from './routes/index';
+import {userRoute, categoryRoute, productRoute, errorLogRoute, wishlistRoute, cartRoute} from './routes/index';
 import * as bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
 import { mongoConnect } from './db/db';
@@ -28,7 +28,8 @@ app.use('/user', userRoute);
 app.use('/category',categoryRoute);
 app.use('/product', productRoute);
 app.use('/errorLog', errorLogRoute);
-app.use('/wishlist', validateUser, wishlistRoute);
+app.use('/wishlist', wishlistRoute);
+app.use('/cart', cartRoute);
 
 // Port
 app.listen(3000, () => {

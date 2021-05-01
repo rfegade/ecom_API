@@ -1,12 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WishListController = void 0;
+var mongoose_1 = require("mongoose");
 var WishList_1 = require("../models/WishList");
 var WishListController = /** @class */ (function () {
     function WishListController() {
     }
     WishListController.getWishList = function (req, res, next) {
         WishList_1.WishList.aggregate([
+            {
+                $match: { userId: new mongoose_1.Types.ObjectId(req.body.userId), status: 'A' }
+            },
             {
                 $lookup: {
                     from: 'products',
