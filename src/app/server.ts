@@ -20,6 +20,7 @@ app.use(compression());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT");
     next();
 });
 
@@ -38,5 +39,5 @@ app.use('/cart', cartRoute);
 // Port
 app.listen(process.env.PORT || 3000, () => {
     mongoConnect.connect().then(res => console.log('Database is connected'));
-    console.log('Server running on port 3000')
+    console.log('Server is running')
 });
