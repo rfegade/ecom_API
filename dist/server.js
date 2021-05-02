@@ -5,10 +5,15 @@ var index_1 = require("./routes/index");
 var bodyParser = require("body-parser");
 var dotenv = require("dotenv");
 var db_1 = require("./db/db");
+var helmet = require("helmet");
+var compression = require("compression");
+// const helmet: Helmet
 // load environment file
 dotenv.config();
 // load express App
 var app = express();
+app.use(helmet());
+app.use(compression());
 // Allow CORS 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from

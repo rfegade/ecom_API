@@ -3,13 +3,17 @@ import {userRoute, categoryRoute, productRoute, errorLogRoute, wishlistRoute, ca
 import * as bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
 import { mongoConnect } from './db/db';
-import { validateUser } from './middleware/auth';
+import * as helmet from "helmet";
+import * as compression from "compression";
 
+// const helmet: Helmet
 // load environment file
 dotenv.config();
 
 // load express App
 var app = express();
+app.use(helmet());
+app.use(compression());
 
 // Allow CORS 
 
