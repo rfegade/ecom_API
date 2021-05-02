@@ -37,7 +37,7 @@ app.use('/wishlist', wishlistRoute);
 app.use('/cart', cartRoute);
 
 // Port
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT, () => {
     mongoConnect.connect().then(res => console.log('Database is connected'));
     console.log('Server is running')
 });

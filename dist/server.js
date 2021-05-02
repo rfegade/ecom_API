@@ -32,7 +32,7 @@ app.use('/errorLog', index_1.errorLogRoute);
 app.use('/wishlist', index_1.wishlistRoute);
 app.use('/cart', index_1.cartRoute);
 // Port
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT, function () {
     db_1.mongoConnect.connect().then(function (res) { return console.log('Database is connected'); });
     console.log('Server is running');
 });
