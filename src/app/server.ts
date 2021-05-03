@@ -6,12 +6,14 @@ import { mongoConnect } from './db/db';
 import * as helmet from "helmet";
 import * as compression from "compression";
 
+
 // const helmet: Helmet
 // load environment file
 dotenv.config();
 
 // load express App
 var app = express();
+//var server = http.createServer(app);
 app.use(helmet());
 app.use(compression());
 
@@ -38,7 +40,8 @@ app.use('/cart', cartRoute);
 
 // Port
 const host = '0.0.0.0';
-const port = process.env.PORT || 3000;
+//const port = process.env.PORT || 3000;
+const port = parseInt(process.env.PORT || '3000', 10) || 3000;
 
 app.listen(port, host, function() {
     mongoConnect.connect().then(res => console.log('Database is connected'));
