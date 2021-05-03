@@ -31,6 +31,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
 
 //Routes
+app.get('/', function (req, res) {
+    res.send({ response: 'I am alive' }).status(200)
+})
 app.use('/user', userRoute);
 app.use('/category',categoryRoute);
 app.use('/product', productRoute);
