@@ -47,6 +47,7 @@ const host = '0.0.0.0';
 const port = parseInt(process.env.PORT || '3000', 10) || 3000;
 
 app.listen(port, host, function() {
+    console.log(`process.env.MONGODB_URL - ${process.env.MONGODB_URL}`);
     mongoConnect.connect().then(res => console.log('Database is connected'));
     console.log('Server is running')
 });
